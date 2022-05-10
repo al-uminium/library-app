@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --header-height: 25%
+}
+
+html, body {
+    height: 100vh;
+}
+
+.container {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: var(--header-height) calc(100% - var(--header-height));
+}
+
+.header {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+    border: 1px solid black;
+}
+
+.add-book {
+    height: 2rem;
+    width: 6.5rem;
+}
+
+.library-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 15px;
+    place-items: center;
+}
+
+.book-card {
+    width: 14rem;
+    height: 19rem;
+    border: 1px solid black;
+}
