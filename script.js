@@ -1,4 +1,5 @@
-
+//query selectors
+const addBookBtn = document.querySelector("#add-book")
 
 
 //initialize library in array
