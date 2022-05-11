@@ -4,40 +4,101 @@
 }
 
 :root {
-    --header-height: 25%
+    --header-height: 32%
+}
+
+.md-light {
+    color: rgba(165, 165, 165,1);
 }
 
 html, body {
     height: 100vh;
+    background-color: rgb(234, 238, 241);
 }
 
 .container {
     display: grid;
     height: 100vh;
     grid-template-rows: var(--header-height) calc(100% - var(--header-height));
+    position: relative;
 }
 
 .header {
     display: grid;
     grid-template-rows: 1fr 1fr;
     place-items: center;
-    border: 1px solid black;
+    outline: 1px solid rgb(75, 75, 75);
+    background-image: url(/library-app/img/liza-rusalskaya-D0ad5ow9isg-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+    font-family: 'Playfair Display SC', serif;
+    font-size: clamp(2rem, 4.5vw, 5rem);
+    width: 100%;
+    position: relative;
+}
+
+p {
+    color: azure;
+    position: absolute;
+    top: 24%;
 }
 
 .add-book {
     height: 2rem;
     width: 6.5rem;
+    position: absolute;
+    bottom: 8%;
 }
 
 .library-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.5rem;
     place-items: center;
+    padding: 1.5rem;
+    overflow: auto;
 }
 
 .book-card {
     width: 14rem;
     height: 19rem;
-    border: 1px solid black;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+    font-family: 'Libre Baskerville', serif;
+    background-color: rgba(32, 37, 39, 0.08);
+    color: rgb(165, 165, 165);
+}
+
+.title, .author {
+    font-size: 1.4rem;
+    color: rgb(145, 113, 28);
+}
+
+.page, .read-status {
+    font-size: 0.9rem;
+    color: rgb(133, 134, 134);
+}
+
+.book-container {
+    padding: 0.5rem;
+}
+
+.book-container div {
+    padding-bottom: 0.5rem;
+}
+
+.card-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.card-button-container span{
+    padding-right: 1rem;
+    font-size: 1.5rem;
+}
+
+.card-button-container span:hover{
+    color: rgb(255, 255, 255);
 }
