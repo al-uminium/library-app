@@ -97,9 +97,13 @@ fieldset input[type=checkbox] {
 fieldset button {
     background-color: rgb(245, 181, 43);
     justify-self: center;
+    cursor: pointer;
 }
 
-
+fieldset button:hover {
+    background-color: rgb(243, 217, 164);
+    transition: 0.2s;
+}
 
 .container {
     display: grid;
@@ -135,7 +139,7 @@ p {
     bottom: 8%;
 }
 
-.library-container {
+#library-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 1.5rem;
