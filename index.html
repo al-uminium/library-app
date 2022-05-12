@@ -15,7 +15,7 @@
     <div class="container">
         <div class="header">
             <p>Bibliotheca</p>
-            <button id="add-book" type="button">Add A Book</button>
+            <button id="add-book" type="button" class="btn">Add A Book</button>
         </div>
         <div class="library-container">
             <div class="book-card">
@@ -34,8 +34,30 @@
             </div>
         </div>
     </div>
-    <div class="modal-form">
-        .close
+    <div id="modal-form">
+        <span class="material-icons-outlined close-btn">close</span>
+        <form action="#">
+            <fieldset>
+                <legend>Add A Book</legend>
+                <div>
+                    <label for="book-title">Book Title: </label>
+                    <input type="text" name="book-title" id="book-title" required>
+                </div>
+                <div>
+                    <label for="book-author">Author: </label>
+                    <input type="text" name="book-author" id="book-author" required>
+                </div>
+                <div>
+                    <label for="book-page">No. of pages: </label>
+                    <input type="number" name="book-page" id="book-page" required>
+                </div>
+                <div>
+                    <label for="book-read">Have you read the book?</label>
+                    <input type="checkbox" name="book-read" id="book-read" required>
+                </div>
+                <button type="button" class="btn" id="modal-add-book">Add Book</button>
+            </fieldset>
+        </form>
     </div>
     <div class="modal-overlay">
         
