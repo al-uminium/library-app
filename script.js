@@ -34,7 +34,7 @@ const getModalInputValues = () => {
     const bookTitle = bookTitleInput.value;
     const bookAuthor = bookAuthorInput.value;
     const bookPage = bookPageInput.value;
-    const bookReadStatus = bookAuthorInput.checked;
+    const bookReadStatus = bookReadInput.checked;
 
     return [
         bookTitle, 
@@ -44,7 +44,19 @@ const getModalInputValues = () => {
     ]
 }
 
-const createBookCard = (book) => {
+const toggleBookReadStatus = (btnParent) => {
+    const readSpan = btnParent.previousElementSibling.childNodes[1].lastElementChild
+    const eyeSpan = btnParent.childNodes[0]
+
+    readSpan.innerText = readSpan.innerText === "{read}" ? "{unread}" : "{read}"
+    eyeSpan.innerText = eyeSpan.innerText === "visibility" ? "visibility_off" : "visibility";
+}
+
+const toggleModal = () => {
+    modalForm.classList.toggle("close")
+}
+
+const createBookCard = (book, index) => {
     //create book card elements
     const bookCard = document.createElement("div")
     const bookContainer = document.createElement("div")
@@ -69,7 +81,7 @@ const createBookCard = (book) => {
     authorSpan.classList.add("author")
     pageSpan.classList.add("page")
     readStatusSpan.classList.add("read-status")
-    toggleReadSpan.classList.add("material-icons-outlined", "md-light")
+    toggleReadSpan.classList.add("material-icons-outlined", "md-light", "read-btn")
     deleteCardSpan.classList.add("material-icons-outlined", "md-light", "del-btn")
 
     //Putting them together
@@ -85,6 +97,7 @@ const createBookCard = (book) => {
 
     cardButtonContainer.appendChild(toggleReadSpan)
     cardButtonContainer.appendChild(deleteCardSpan)
+    cardButtonContainer.dataset.index = index
     bookCard.appendChild(cardButtonContainer)
 
     libraryContainer.appendChild(bookCard)
@@ -105,51 +118,49 @@ const createBookCard = (book) => {
 }
 
 const renderBookCards = () => {
-    myLibrary.forEach(book => {
-        createBookCard(book)
+    libraryContainer.innerHTML = ""
+    myLibrary.forEach((book, index) => {
+        createBookCard(book, index)
     });
 
     const delBtn = document.querySelectorAll(".del-btn")
+    const readBtn = document.querySelectorAll(".read-btn")
 
     delBtn.forEach(btn => {
         btn.addEventListener("click", () => {
-            //this long chain gets the title of the card lol
-            deleteBook(btn.parentElement.previousElementSibling.children[0].children[0].innerText)
+            deleteBook(btn.parentElement)
         })
     });
-    console.log(delBtn)
+    readBtn.forEach(btn => {
+        btn.addEventListener("click", () => {
+            toggleBookReadStatus(btn.parentElement)
+        })
+    })
 }
 
-const deleteBook = (title) => {
-    for (let index = 0; index < myLibrary.length; index++) {
-        const book = myLibrary[index];
-        if (book.title === title) {
-            myLibrary.splice(index, 1)
-        }
-    }
-    libraryContainer.innerHTML = ""
+const deleteBook = (btnParent) => {
+    const btnParentIndex = btnParent.dataset.index;
+    myLibrary.splice(btnParentIndex,1);
     renderBookCards()
 }
 
 //Event Listeners
 closeModalBtn.addEventListener("click", () => {
-    modalForm.classList.toggle("close")
+    toggleModal()
 })
 
 addBookBtn.addEventListener("click", () => {
-    modalForm.classList.toggle("close")
+    toggleModal()
 })
 
 modalAddBookBtn.addEventListener("click", () => {
-    const modalInputValues = getModalInputValues()
-    addBookToLibrary(...modalInputValues)
-    console.log(myLibrary)
+    const modalInputValues = getModalInputValues();
+    addBookToLibrary(...modalInputValues);
+    renderBookCards();
+    toggleModal();
 })
 
 const testBook_1 = new Book("ABCDEFU", "Gayle", 10, true);
 const testBook_2 = new Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 756, false)
 const testBook_3 = new Book("The Story of Philosophy", "Will Durant", 2006, false)
 
-myLibrary.push(testBook_1, testBook_2, testBook_3)
-
-renderBookCards()
